@@ -6,7 +6,7 @@ const LOGO = () => {
         <div className='flex flex-col items-center'>
             <div className='bg-[#915EFF] rounded-full p-2'>
                 <Image
-                    src={"/images/streamy-img.png"}
+                    src={"/images/streamy-img.jpg"}
                     alt='logo-img'
                     width={80}
                     height={80}

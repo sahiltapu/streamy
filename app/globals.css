@@ -18,17 +18,17 @@ body,
 
 /* ==== clerk class override ===== */
 .cl-userButtonPopoverActionButtonIcon {
-  color: #D0E5FA;
+  color: #d0e5fa;
 }
 
 .cl-socialButtonsBlockButtonText__discord {
-  color: #D0E5FA;
+  color: #d0e5fa;
 }
 .cl-socialButtonsBlockButtonText__google {
-  color: #D0E5FA;
+  color: #d0e5fa;
 }
 .cl-socialButtonsBlockButtonText__twitch {
-  color: #D0E5FA;
+  color: #d0e5fa;
 }
 .cl-logoBox {
   height: 40px;
@@ -43,12 +43,31 @@ body,
 }
 
 .cl-internal-wkkub3 {
-  color: #D0E5FA;
+  color: #d0e5fa;
 }
 .cl-userButtonPopoverActionButton {
-  color: #D0E5FA;
+  color: #d0e5fa;
 }
-
+.cl-otpCodeFieldInput {
+  background-color: #d0e5fa;
+  color: #050816;
+}
+.cl-internal-180wb59 {
+  display: none;
+}
+.cl-card {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.cl-socialButtons {
+  display: flex;
+  flex-direction: row;
+}
+@media (width <= 425px) {
+  .cl-socialButtons {
+    flex-direction: column;
+  }
+}
 @layer base {
   :root {
     --background: 0 0% 100%;

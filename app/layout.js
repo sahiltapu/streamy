@@ -1,7 +1,6 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import ThemeProvider from "@/components/theme-provider";
-import ConnectToMongoDB from "@/lib/connectToDB";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -10,7 +9,7 @@ export const metadata = {
   title: "Streamy",
   description: "A live streaming platform",
   icons: {
-    icon: "/images/streamy-img.png",
+    icon: "/images/streamy-logo-img.png",
   },
 };
 
@@ -38,7 +37,6 @@ export default function RootLayout({ children }) {
             forcedTheme={"dark"}
             storageKey="gamehub-theme"
           >
-            {ConnectToMongoDB()}
             {children}
           </ThemeProvider>
         </ClerkProvider>

@@ -2,11 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
 html,
 body,
 :root {
   height: 100%;
   @apply bg-[#050816];
+  color: aliceblue;
 }
 .hidden-scrollbar {
   -ms-overflow-style: none;
@@ -63,11 +65,31 @@ body,
   display: flex;
   flex-direction: row;
 }
+.cl-badge {
+  color: #3a8ceb;
+  border: 1px solid blueviolet;
+}
+.cl-avatarImageActionsUpload {
+  color: aliceblue;
+}
+.cl-navbarButton {
+  color: aliceblue;
+}
+.cl-navbarButton:hover {
+  color: #3a8ceb;
+}
+.cl-navbarButton:hover:active {
+  color: #3a8ceb;
+}
+.cl-userButtonPopoverActionButton:hover {
+  color: #3a8ceb;
+}
 @media (width <= 425px) {
   .cl-socialButtons {
     flex-direction: column;
   }
 }
+
 @layer base {
   :root {
     --background: 0 0% 100%;

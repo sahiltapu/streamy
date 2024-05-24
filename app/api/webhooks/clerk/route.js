@@ -39,46 +39,79 @@ export async function POST(req) {
         });
     }
 
-    const eventType = evt.type;
+    const { type: eventType, data } = evt;
+    const { id, username, image_url: imageUrl, bio, email_addresses } = data;
+    const email = email_addresses?.[0]?.email_address;
 
-    if (eventType === 'user.created') {
-        const { id, username, image_url: imageUrl, bio, email_addresses } = payload.data;
-        const email = email_addresses[0]?.email_address;
+    try {
+        await ConnectToMongoDB();
 
-        if (!email) {
-            console.error('Error: No email address found in the payload.');
-            return new Response('Error occurred -- no email address found', {
-                status: 400
-            });
-        }
+        switch (eventType) {
+            case 'user.created':
+                if (!email) {
+                    console.error('Error: No email address found in the payload.');
+                    return new Response('Error occurred -- no email address found', {
+                        status: 400
+                    });
+                }
 
-        try {
-            await ConnectToMongoDB();
+                const existingUser = await User.findOne({ username });
+                if (existingUser) {
+                    console.error('Error: Username already exists.');
+                    return new Response('Error occurred -- username already exists', {
+                        status: 400
+                    });
+                }
 
-            // Check if a user with the same username already exists
-            const existingUser = await User.findOne({ username });
-            if (existingUser) {
-                console.error('Error: Username already exists.');
-                return new Response('Error occurred -- username already exists', {
+                await User.create({
+                    username,
+                    email,
+                    imageUrl,
+                    externalUserId: id,
+                    bio: bio || 'Hey there, I am a new user of OG Streamy'
+                });
+
+                console.log("User created successfully");
+                break;
+
+            case 'user.updated':
+                const userToUpdate = await User.findOne({ externalUserId: id });
+                if (!userToUpdate) {
+                    return new Response('User not found', {
+                        status: 404
+                    });
+                }
+
+                userToUpdate.username = username || userToUpdate.username;
+                userToUpdate.imageUrl = imageUrl || userToUpdate.imageUrl;
+                userToUpdate.email = email || userToUpdate.email;
+
+                await userToUpdate.save();
+
+                console.log("User updated successfully");
+                break;
+
+            case 'user.deleted':
+                const userToDelete = await User.findOneAndDelete({ externalUserId: id });
+                if (!userToDelete) {
+                    return new Response('User not found', {
+                        status: 404
+                    });
+                }
+
+                console.log("User deleted successfully");
+                break;
+
+            default:
+                return new Response('Event type not supported', {
                     status: 400
                 });
-            }
-
-            await User.create({
-                username,
-                email,
-                imageUrl,
-                externalUserId: id,
-                bio: bio || 'Hey there, I am a new user of OG Streamy'
-            });
-
-            console.log("User created successfully");
-        } catch (err) {
-            console.error('Error creating user in MongoDB:', err);
-            return new Response('Error occurred while creating user', {
-                status: 500
-            });
         }
+    } catch (err) {
+        console.error(`Error handling event ${eventType} in MongoDB:`, err);
+        return new Response(`Error occurred while handling ${eventType} event`, {
+            status: 500
+        });
     }
 
     return new Response('', { status: 200 });

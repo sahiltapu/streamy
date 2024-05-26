@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import qs from "query-string";
-import { SearchIcon, X } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { SearchIcon, X } from "lucide-react";
+import qs from "query-string";
 
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -19,7 +19,7 @@ const Search = () => {
       return;
     }
 
-    const url = qs.stringify(
+    const url = qs.stringifyUrl(
       {
         url: "/search",
         query: { term: trimmedValue },

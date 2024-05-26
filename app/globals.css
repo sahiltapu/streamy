@@ -84,6 +84,31 @@ body,
 .cl-userButtonPopoverActionButton:hover {
   color: #3a8ceb;
 }
+.cl-internal-1x918gh {
+  color: whitesmoke;
+}
+.cl-internal-1x918gh:hover {
+  color: whitesmoke;
+}
+.cl-internal-11ttlho{
+  display: none;
+}
+.cl-internal-1ujm9wq{
+  display: none;
+}
+.cl-internal-1pmoz52{
+  color: #d0e5fa;
+}
+.cl-internal-1pmoz52:hover{
+  color: #d0e5fa;
+}
+.cl-internal-x9em8d{
+  color: green;
+}
+.cl-internal-x9em8d:hover{
+  color: green;
+  opacity: 0.7;
+}
 @media (width <= 425px) {
   .cl-socialButtons {
     flex-direction: column;

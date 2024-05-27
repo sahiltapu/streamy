@@ -5,14 +5,12 @@ import { useSidebar } from '@/zustand/useSidebar'
 import React, { useState, useEffect } from 'react'
 import { ToggleSkeleton } from './Toggle'
 import { RecommendedSkeleton } from '../Recommended'
+import { useIsClient } from 'usehooks-ts'
 
 const Wrapper = ({ children }) => {
-    const [isClient, setIsClient] = useState(false);
+    const isClient = useIsClient()
     const { collapsed } = useSidebar((state) => state);
-    useEffect(() => {
-        setIsClient(true)
-    }, [])
-
+    
     // Handles the serverSide rendering and remove the flickering of the while loading the website.
     // This is rendered in serverside.
     if (!isClient) return (

@@ -6,7 +6,7 @@ import UserItems, { UserItemsSkeleton } from './sidebar/UserItems';
 export const RecommendedSkeleton = () => {
     return (
         <ul className='px-2'>
-            {Array.from({ length: 5 }).map((_, i) => (
+            {Array.from({ length: 4 }).map((_, i) => (
                 <UserItemsSkeleton key={i} />
             ))}
         </ul>

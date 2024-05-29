@@ -31,5 +31,20 @@ const UserSchema = new mongoose.Schema({
     },
 });
 
+UserSchema.virtual('following', {
+    ref: 'Follow',
+    localField: '_id',
+    foreignField: 'followerId',
+    justOne: false
+});
+UserSchema.virtual('followedBy', {
+    ref: 'Follow',
+    localField: '_id',
+    foreignField: 'followedById',
+    justOne: false
+});
+UserSchema.set('toObject', { virtuals: true });
+UserSchema.set('toJSON', { virtuals: true });
+
 const User = mongoose.models.User || mongoose.model('User', UserSchema);
 export default User;

@@ -6,7 +6,7 @@ import User from '@/models/user.model';
 export const getSelf = async () => {
     const self = await currentUser();
     if (!self || !self.username) {
-        throw newError("Unauthorized!");
+        return null;
     }
 
     await ConnectToMongoDB();

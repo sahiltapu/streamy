@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 html,
 body,
 :root {
@@ -90,22 +89,22 @@ body,
 .cl-internal-1x918gh:hover {
   color: whitesmoke;
 }
-.cl-internal-11ttlho{
+.cl-internal-11ttlho {
   display: none;
 }
-.cl-internal-1ujm9wq{
+.cl-internal-1ujm9wq {
   display: none;
 }
-.cl-internal-1pmoz52{
+.cl-internal-1pmoz52 {
   color: #d0e5fa;
 }
-.cl-internal-1pmoz52:hover{
+.cl-internal-1pmoz52:hover {
   color: #d0e5fa;
 }
-.cl-internal-x9em8d{
+.cl-internal-x9em8d {
   color: green;
 }
-.cl-internal-x9em8d:hover{
+.cl-internal-x9em8d:hover {
   color: green;
   opacity: 0.7;
 }
@@ -185,5 +184,29 @@ body,
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Loader */
+.loader {
+  width: 60px;
+  aspect-ratio: 2;
+  --_g: no-repeat radial-gradient(circle closest-side, #ffffff 90%, #0000);
+  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  background-size: calc(100% / 4) 50%;
+  animation: l3 1s infinite linear;
+}
+@keyframes l3 {
+  20% {
+    background-position: 0% 0%, 50% 50%, 100% 50%;
+  }
+  40% {
+    background-position: 0% 100%, 50% 0%, 100% 50%;
+  }
+  60% {
+    background-position: 0% 50%, 50% 100%, 100% 0%;
+  }
+  80% {
+    background-position: 0% 50%, 50% 50%, 100% 100%;
   }
 }

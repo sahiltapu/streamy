@@ -1,18 +1,22 @@
 "use client"
 
 import { onFollow } from '../actions/onFollow'
-import React, { useTransition } from 'react'
+import React, { useState, useTransition } from 'react'
 import { Button } from './ui/button'
 import { toast } from 'sonner'
+import Loader from './Loader'
 
 
 const FollowButton = ({ loggedInUser, UserId, isFollowing }) => {
     const [isPending, startTransition] = useTransition(false);
+    const [loading, setLoading] = useState(false);
     const onClick = () => {
-        console.log("here is the button console log XDXDXDXDXDXD")
-        console.log(UserId)
+        setLoading(true);
         startTransition(() => {
-            onFollow(UserId).then((data) => toast.success(`You are now following`)).catch(() => toast.error("something went wrong"))
+            onFollow(UserId)
+                .then(data => (toast.success(`You are now following`)))
+                .catch(() => toast.error("something went wrong"))
+                .finally(setLoading(false))
 
         })
     }
@@ -21,7 +25,10 @@ const FollowButton = ({ loggedInUser, UserId, isFollowing }) => {
             disabled={isPending || isFollowing || loggedInUser}
             onClick={onClick}
             variant="custom">
-            Follow
+            {
+                loading ? <Loader /> :
+                    "Follow"
+            }
         </Button>
     )
 }

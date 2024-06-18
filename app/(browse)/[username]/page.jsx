@@ -13,7 +13,7 @@ const UserPage = async ({ params }) => {
     // console.log(user._id)
     const isFollowing = await isFollowingUser(user._id.toString());
     // console.log(isFollowing)
-    const loggedInUser = await getSelf();
+    const loggedInUser = await getSelf() ? true : false;
     // console.log(loggedInUser);
     return (
         <div className='flex flex-col gap-y-4'>
